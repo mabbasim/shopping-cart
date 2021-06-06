@@ -159,16 +159,16 @@
       // }
 
       function handleProductChange(isIncrease, id) {
-        const phoneCase = document.getElementById(id);
-        const phoneCaseNumber = parseInt(phoneCase.value);
-        let newCaseNumber = phoneCaseNumber;
+        const productInputId = document.getElementById(id);
+        const productInputNumber = parseInt(productInputId.value);
+        let newInputNumber = productInputNumber;
         if (isIncrease == true) {
-          newCaseNumber = phoneCaseNumber + 1;
+          newInputNumber = productInputNumber + 1;
         }
         if (isIncrease == false && newCaseNumber > 0) {
-          newCaseNumber = phoneCaseNumber - 1;
+          newInputNumber = productInputNumber - 1;
         }
-        phoneCase.value = newCaseNumber;
+        productInputId.value = newInputNumber;
       }
     </script>
   </body>
