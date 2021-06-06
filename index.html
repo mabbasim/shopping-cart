@@ -84,9 +84,9 @@
                 </div>
 
                 <div class="col-md-4 status">
-                  <h5>$1,278</h5>
-                  <h5>$0</h5>
-                  <h5>$1,278</h5>
+                  <h5 id="total-price">$1,278</h5>
+                  <h5 id="tax-amount">$0</h5>
+                  <h5 id="grand-total">$1,278</h5>
                 </div>
               </div>
             </div>
@@ -108,6 +108,7 @@
           const newCasePrice =
             parseInt(document.getElementById("iPhone").value) * 1219;
           document.getElementById("iphonePrice").innerText = newCasePrice;
+          calculateTotal();
         });
 
       document
@@ -117,6 +118,7 @@
           const newCasePrice =
             parseInt(document.getElementById("iPhone").value) * 1219;
           document.getElementById("iphonePrice").innerText = newCasePrice;
+          calculateTotal();
         });
 
       document
@@ -126,13 +128,9 @@
           const newCasePrice =
             parseInt(document.getElementById("phoneCase").value) * 59;
           document.getElementById("casePrice").innerText = newCasePrice;
+          calculateTotal();
         });
 
-      // document
-      //   .getElementById("decreaseCase")
-      //   .addEventListener("click", function () {
-      //     handleCaseChange(false);
-      //   });
       document
         .getElementById("decreaseCase")
         .addEventListener("click", function () {
@@ -140,6 +138,7 @@
           const newCasePrice =
             parseInt(document.getElementById("phoneCase").value) * 59;
           document.getElementById("casePrice").innerText = newCasePrice;
+          calculateTotal();
         });
 
       // //phoneCase price handle
@@ -158,6 +157,23 @@
       //   document.getElementById("casePrice").innerText = newCasePrice;
       // }
 
+      //calculate total
+      function calculateTotal() {
+        const subTotal = document.getElementById("total-price");
+        const subTotalPrice =
+          parseInt(document.getElementById("iphonePrice").innerText) +
+          parseInt(document.getElementById("casePrice").innerText);
+        // console.log(subTotalPrice);
+        subTotal.innerText = "$" + subTotalPrice;
+
+        const tax = Math.round(subTotalPrice * 0.1);
+        document.getElementById("tax-amount").innerText = "$" + tax;
+
+        const totalPrice = subTotalPrice + tax;
+        document.getElementById("grand-total").innerText = "$" + totalPrice;
+      }
+
+      //product changing handling
       function handleProductChange(isIncrease, id) {
         const productInputId = document.getElementById(id);
         const productInputNumber = parseInt(productInputId.value);
@@ -165,7 +181,7 @@
         if (isIncrease == true) {
           newInputNumber = productInputNumber + 1;
         }
-        if (isIncrease == false && newCaseNumber > 0) {
+        if (isIncrease == false && newInputNumber > 0) {
           newInputNumber = productInputNumber - 1;
         }
         productInputId.value = newInputNumber;
